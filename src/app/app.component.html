@@ -1,0 +1,63 @@
+<div style="background-color:burlywood;"><h1>Welcome to Rabo Bank!</h1></div>
+<div class="form-group">
+
+  <input type="file" #fileImportInput name="File Upload" id="txtFileUpload" (change)="fileChangeListener($event)"
+         accept=".csv" class="form-control"/>
+         <input type="button" value="Reset" pInputText (click)="fileReset()" class="rbnButton" /> 
+</div>
+
+
+
+<div>
+    <br/>
+  <ng-container *ngIf="enableTable">
+
+
+      <p-panel   header="Filter" [toggleable]="true"  [collapsed]="false" styleClass="panelGround">
+           <input type="text"  placeholder="Issue Count" class="form-control"  [(ngModel)]="searchTerm"/> 
+           &nbsp;&nbsp;
+            <input type="button" class="rbnButton" value="Search"  (click)="search()"/> 
+&nbsp;&nbsp;
+            <input type="button" class="rbnButton" value="Reset Filter" (click)="filterReset()"/> 
+            
+        </p-panel>
+<br/>
+        <div >
+  <p-table [(value)]="csvRecords" [style] = "{'border':'1px solid'}"  [autoLayout]="true" [paginator]="true" [rows]="10"  >
+      <ng-template pTemplate="header"  >
+    <tr >
+     
+      <th>First Name</th>
+      <th>Sur Name</th>
+      <th>Issue count</th>
+      <th>Date of birth</th>       
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-csvrecord>
+    <tr>
+      <td>
+        {{csvrecord.firstName}}
+      </td>
+      <td>
+        {{csvrecord.lastName}}
+      </td>
+      <td>
+        {{csvrecord.issueCount}}
+      </td>
+      <td>
+        {{csvrecord.dob}}
+      </td>
+       
+
+    </tr>
+       
+  </ng-template>
+
+  
+    
+  </p-table>
+</div>
+</ng-container>
+
+</div>
+
